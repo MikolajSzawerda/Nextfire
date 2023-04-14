@@ -15,40 +15,42 @@ export default function Navbar() {
         router.reload();
     }
 
-    return <nav className="navbar">
-        <ul>
-            <li>
-                <Link href="/">
-                    <button className="btn-logo">NXT</button>
-                </Link>
-            </li>
-            {username && (
-                <>
-                    <li className="push-left">
-                        <button onClick={signOutNow}>Sign out</button>
-                    </li>
-                    <li>
-                        <Link href="/admin">
-                            <button>Write Posts</button>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href={`/${username}`}>
-                            <img src={user?.photoURL || '/hacker.png'} alt="" referrerPolicy="no-referrer"/>
-                        </Link>
-                    </li>
-                </>
-
-            )}
-
-            {!username && (
+    return (
+        <nav className="navbar">
+            <ul>
                 <li>
-                    <Link href="/enter">
-                        <button className="btn-blue">Log in</button>
+                    <Link href="/" legacyBehavior>
+                        <button className="btn-logo">NXT</button>
                     </Link>
                 </li>
-            )}
-        </ul>
+                {username && (
+                    <>
+                        <li className="push-left">
+                            <button onClick={signOutNow}>Sign out</button>
+                        </li>
+                        <li>
+                            <Link href="/admin" legacyBehavior>
+                                <button>Write Posts</button>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href={`/${username}`} legacyBehavior>
+                                <img src={user?.photoURL || '/hacker.png'} alt="" referrerPolicy="no-referrer"/>
+                            </Link>
+                        </li>
+                    </>
 
-    </nav>
+                )}
+
+                {!username && (
+                    <li>
+                        <Link href="/enter" legacyBehavior>
+                            <button className="btn-blue">Log in</button>
+                        </Link>
+                    </li>
+                )}
+            </ul>
+
+        </nav>
+    );
 }
