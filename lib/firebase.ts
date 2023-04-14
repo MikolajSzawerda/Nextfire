@@ -2,7 +2,7 @@ import {FirebaseOptions, getApp, initializeApp} from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import {getAuth, GoogleAuthProvider} from "@firebase/auth";
 import {
-    collection, DocumentData,
+    collection, DocumentData, DocumentSnapshot,
     getDocs,
     getFirestore,
     limit,
@@ -46,13 +46,13 @@ export async function getUserWithUsername(username: string) {
     return (await getDocs(q)).docs[0]
 }
 
-export function postToJSON(doc: QueryDocumentSnapshot<DocumentData>) {
+export function postToJSON(doc: QueryDocumentSnapshot<DocumentData>|DocumentSnapshot<DocumentData>) {
     const data = doc.data()
 
     return {
         ...data,
-        createdAt: data.createdAt.toMillis(),
-        updatedAt: data.updatedAt.toMillis()
+        createdAt: data?.createdAt.toMillis(),
+        updatedAt: data?.updatedAt.toMillis()
     }
 
 }

@@ -12,6 +12,12 @@ export const getServerSideProps: GetServerSideProps = async ({query}) => {
     let user = null;
     let posts = null
 
+    if(!userDoc){
+        return {
+            notFound: true
+        }
+    }
+
     if(userDoc) {
         user = userDoc.data()
 
